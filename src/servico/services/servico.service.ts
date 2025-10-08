@@ -25,7 +25,7 @@ export class ServicoService {
       where: {
         id,
       },
-    relations: {
+      relations: {
         categoria: true,
         usuario: true,
       },

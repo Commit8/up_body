@@ -1,29 +1,24 @@
 import { Module } from '@nestjs/common';
-import { Servico } from './servico/entities/servico.entity';
-import { Categoria } from './categoria/entities/categoria.entity';
-import { Usuario } from './usuario/entities/usuario.entity';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsuarioModule } from './usuario/usuario.module';
-import { ServicoModule } from './servico/servico.module';
+import { AppController } from './app.controller';
 import { CategoriaModule } from './categoria/categoria.module';
+import { ProdService } from './data/service/prod.service';
+import { ServicoModule } from './servico/servico.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'db_up_body',
-      entities: [Servico, Categoria, Usuario],
-      synchronize: true,
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useClass: ProdService,
+      imports: [ConfigModule],
     }),
     ServicoModule,
     CategoriaModule,
     UsuarioModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
