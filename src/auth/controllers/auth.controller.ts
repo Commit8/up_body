@@ -1,49 +1,23 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UsuarioService } from '../../usuario/services/usuario.service';
-import { JwtService } from '@nestjs/jwt';
-import { Bcrypt } from '../bcrypt/bcrypt';
-import { UsuarioLogin } from '../entities/usuariologin.entity';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { LocalAuthGuard } from '../guard/local-auth.guard';
+import { AuthService } from '../services/auth.service';
+import { UsuarioLogin } from './../entities/usuariologin.entity';
 
-@Injectable()
-export class AuthService {
-  constructor(
-    private usuarioService: UsuarioService,
-    private jwtService: JwtService,
-    private bcrypt: Bcrypt,
-  ) {}
+@Controller('/usuarios')
+export class AuthController {
+  constructor(private authService: AuthService) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const buscaUsuario = await this.usuarioService.findByUsuario(username);
-
-    if (!buscaUsuario)
-      throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
-
-    const matchPassword = await this.bcrypt.compararSenhas(
-      password,
-      buscaUsuario.senha,
-    );
-
-    if (buscaUsuario && matchPassword) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { senha, ...resposta } = buscaUsuario;
-      return resposta;
-    }
-    return null;
-  }
-
-  async longin(usuarioLogin: UsuarioLogin) {
-    const payload = { sub: usuarioLogin.usuario };
-    const buscaUsuario = await this.usuarioService.findByUsuario(
-      usuarioLogin.usuario,
-    );
-
-    return {
-      id: buscaUsuario?.id,
-      nome: buscaUsuario?.nome,
-      usuario: usuarioLogin.usuario,
-      senha: '',
-      foto: buscaUsuario?.foto,
-      token: `Bearer ${this.jwtService.sign(payload)}`,
-    };
+  @UseGuards(LocalAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  @Post('/logar')
+  login(@Body() usuario: UsuarioLogin): Promise<any> {
+    return this.authService.login(usuario);
   }
 }

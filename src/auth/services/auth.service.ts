@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UsuarioService } from '../../usuario/services/usuario.service';
 import { JwtService } from '@nestjs/jwt';
+import { UsuarioService } from '../../usuario/services/usuario.service';
 import { Bcrypt } from '../bcrypt/bcrypt';
 import { UsuarioLogin } from '../entities/usuariologin.entity';
 
@@ -18,7 +18,7 @@ export class AuthService {
     if (!buscaUsuario)
       throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
 
-    const matchPassword = await this.bcrypt.compararSenha(
+    const matchPassword = await this.bcrypt.compararSenhas(
       password,
       buscaUsuario.senha,
     );
@@ -31,7 +31,7 @@ export class AuthService {
     return null;
   }
 
-  async longin(usuarioLogin: UsuarioLogin) {
+  async login(usuarioLogin: UsuarioLogin) {
     const payload = { sub: usuarioLogin.usuario };
     const buscaUsuario = await this.usuarioService.findByUsuario(
       usuarioLogin.usuario,
