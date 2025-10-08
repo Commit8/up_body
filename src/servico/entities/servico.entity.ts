@@ -1,12 +1,11 @@
 import { IsNotEmpty } from 'class-validator';
-// import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import {
   Column,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
   Timestamp,
-} from 'typeorm/browser';
+} from 'typeorm';
 
 @Entity({ name: 'tb_servicos' })
 export class Servico {
@@ -29,9 +28,9 @@ export class Servico {
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   valor: number;
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.servicos)
+  @ManyToOne(() => Usuario, (usuario) => usuario.servico)
   usuario: Usuario;
 
-  @ManyToOne(() => Categoria, (categoria) => categoria.servicos)
+  @ManyToOne(() => Categoria, (categoria) => categoria.servico)
   categoria: Categoria;
 }
