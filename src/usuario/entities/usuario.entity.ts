@@ -1,0 +1,37 @@
+import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity({ name: 'tb_usuarios' })
+export class Usuario {
+  // adicionar @ApiProperty / Swagger
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @IsNotEmpty()
+  @Column({ length: 255, nullable: false })
+  nome: string;
+
+  @IsEmail()
+  @Column({ length: 255, nullable: false })
+  usuario: string;
+
+  @IsNotEmpty()
+  @MinLength(8)
+  @Column({ length: 255, nullable: false })
+  senha: string;
+
+  @Column({ length: 5000 })
+  foto: string;
+
+  @IsNotEmpty()
+  @Column({ length: 100, nullable: false })
+  peso: string;
+
+  @IsNotEmpty()
+  @Column({ length: 100, nullable: false })
+  altura: string;
+
+  // Relacionamento de usuario com servico
+  @OneToMany(() => Servico, (servico) => servico.usuario)
+  servico: Servico[];
+}
