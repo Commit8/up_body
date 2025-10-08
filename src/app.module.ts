@@ -4,6 +4,8 @@ import { Categoria } from './categoria/entities/categoria.entity';
 import { Usuario } from './usuario/entities/usuario.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './usuario/usuario.module';
+import { ServicoModule } from './servico/servico.module';
+import { CategoriaModule } from './categoria/categoria.module';
 
 @Module({
   imports: [

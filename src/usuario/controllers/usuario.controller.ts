@@ -40,9 +40,9 @@ export class UsuarioController {
     return this.usuarioService.update(usuario);
   }
 
-  @Get('/imc/:id')
-  @HttpCode(HttpStatus.OK)
-  findImc(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
-    return this.usuarioService.findImc(id);
-  }
+  // @Get('/imc/:id')
+  // @HttpCode(HttpStatus.OK)
+  // findImc(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
+  //   return this.usuarioService.findImc(id);
+  // }
 }

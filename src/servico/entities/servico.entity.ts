@@ -6,6 +6,8 @@ import {
   PrimaryGeneratedColumn,
   Timestamp,
 } from 'typeorm';
+import { Usuario } from '../../usuario/entities/usuario.entity';
+import { Categoria } from '../../categoria/entities/categoria.entity';
 
 @Entity({ name: 'tb_servicos' })
 export class Servico {

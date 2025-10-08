@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Servico } from '../../servico/entities/servico.entity';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
