@@ -46,7 +46,7 @@ export class ServicoService{
     });
   }
   async create(servico: Servico): Promise<Servico> {
-    await this.servicoServico.findById(servico.catergoria.id);
+    await this.categoriaService.findById(servico.categoria.id);
   
     return await this.servicoRepository.save(servico);
   }
