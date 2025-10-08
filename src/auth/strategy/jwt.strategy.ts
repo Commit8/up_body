@@ -1,25 +1,19 @@
 import { Injectable } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
-import {Strategy, ExtractJwt} from "passport-jwt";
-import {jwtConstantes} from "../constants/constants"
-
+import { Strategy, ExtractJwt } from "passport-local";
+import { jwtConstants } from "../constants/constants";
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
-  private _usernameField: string;
-  private _passwordField: string;
-
-  constructor(private readonly authService: AuthService) {
-    super();
-    this._usernameField = 'usuario';
-    this._passwordField = 'senha';
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor() {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: jwtConstants.secret,
+    });
   }
 
-  async validate(usuario: string, senha: string): Promise<any> {
-    const validaUsuario = await this.authService.validateUser(usuario, senha);
-    if (!validaUsuario) {
-      throw new UnauthorizedException('Usuário e/ou senha incorretos!');
-    }
-    return validaUsuario;
+  async validate(payload: any) {
+    return payload;
     }
 }
