@@ -56,4 +56,9 @@ export class UsuarioService {
 
     return await this.usuarioRepository.save(usuario);
   }
+  async findImc(id: number): Promise<number> {
+    const usuario = await this.findById(id);
+    const imc = usuario.peso / usuario.altura ** 2;
+    return imc;
+  }
 }

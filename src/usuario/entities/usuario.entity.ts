@@ -25,12 +25,12 @@ export class Usuario {
   foto: string;
 
   @IsNotEmpty()
-  @Column({ length: 100, nullable: false })
-  peso: string;
+  @Column({ type: 'bigint', nullable: false })
+  peso: number;
 
   @IsNotEmpty()
-  @Column({ length: 100, nullable: false })
-  altura: string;
+  @Column({ type: 'bigint', nullable: false })
+  altura: number;
 
   // Relacionamento de usuario com servico
   @OneToMany(() => Servico, (servico) => servico.usuario)
