@@ -3,9 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { CategoriaModule } from './categoria/categoria.module';
-import { ProdService } from './data/service/prod.service';
 import { ServicoModule } from './servico/servico.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { ProdService } from './data/service/prod.service';
 
 @Module({
   imports: [

@@ -28,13 +28,14 @@ export class Usuario {
   @Column({ length: 5000 })
   @ApiProperty()
   foto: string;
+
   @IsNotEmpty()
-  @Column({ type: 'decimal', precision: 5, scale: 2, nullable: false })
+  @Column({ type: 'decimal', precision: 5, scale: 2, nullable: true })
   @ApiProperty()
   peso: number;
 
   @IsNotEmpty()
-  @Column({ type: 'decimal', precision: 4, scale: 2, nullable: false })
+  @Column({ type: 'decimal', precision: 4, scale: 2, nullable: true })
   @ApiProperty()
   altura: number;
 
