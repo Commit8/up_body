@@ -48,7 +48,7 @@ export class UsuarioController {
 
   @Get('/imc/:id')
   @HttpCode(HttpStatus.OK)
-  findImc(@Param('id', ParseIntPipe) id: number): Promise<number> {
+  findImc(@Param('id', ParseIntPipe) id: number): Promise<string> {
     return this.usuarioService.findImc(id);
   }
 }
