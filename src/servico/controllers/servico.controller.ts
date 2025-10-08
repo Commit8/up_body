@@ -1,0 +1,47 @@
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Put,
+} from '@nestjs/common';
+import { Servico } from '../entities/servico.entity';
+import { ServicoService } from '../services/servico.service';
+
+@Controller('/servicos')
+export class ServicoController {
+  constructor(private readonly servicoService: ServicoService) {}
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  findAll(): Promise<Servico[]> {
+    return this.servicoService.findAll();
+  }
+  @Get('/:id')
+  @HttpCode(HttpStatus.OK)
+  findById(@Param('id', ParseIntPipe) id: number): Promise<Servico> {
+    return this.servicoService.findById(id);
+  }
+
+  @Get('/plano/:plano')
+  @HttpCode(HttpStatus.OK)
+  findByAllPlano(@Param('plano') plano: string): Promise<Servico[]> {
+    return this.servicoService.findByAllPlano(plano);
+  }
+
+  @Put()
+  @HttpCode(HttpStatus.OK)
+  update(@Body() servico: Servico): Promise<Servico> {
+    return this.servicoService.update(servico);
+  }
+
+  @Delete('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.servicoService.delete(id);
+  }
+}
