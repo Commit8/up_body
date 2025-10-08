@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Post,
   Put,
 } from '@nestjs/common';
 import { Servico } from '../entities/servico.entity';
@@ -31,6 +32,12 @@ export class ServicoController {
   @HttpCode(HttpStatus.OK)
   findByAllPlano(@Param('plano') plano: string): Promise<Servico[]> {
     return this.servicoService.findByAllPlano(plano);
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() servico: Servico): Promise<Servico> {
+    return this.servicoService.create(servico);
   }
 
   @Put()
