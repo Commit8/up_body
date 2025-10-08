@@ -11,7 +11,7 @@ import { AppService } from './app.service';
       username: 'root',
       password: 'root',
       database: 'db_up_body',
-      entities: [Produtos, Categorias, Usuario],
+      entities: [Produto, Categoria, Usuario],
       synchronize: true,
     }),
     ProdutoModule,
