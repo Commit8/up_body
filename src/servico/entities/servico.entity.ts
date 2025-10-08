@@ -18,7 +18,6 @@ export class Servico {
   @Column({ length: 255, nullable: false })
   plano: string;
 
-  
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   inicio: Timestamp;
 
