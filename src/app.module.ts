@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { CategoriaModule } from './categoria/categoria.module';
-import { ProdService } from './data/service/prod.service';
+import { DevService } from './data/service/dev.service';
 import { ServicoModule } from './servico/servico.module';
 import { UsuarioModule } from './usuario/usuario.module';
 
@@ -11,7 +11,7 @@ import { UsuarioModule } from './usuario/usuario.module';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
-      useClass: ProdService,
+      useClass: DevService,
       imports: [ConfigModule],
     }),
     ServicoModule,
