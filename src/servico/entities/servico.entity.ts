@@ -20,12 +20,12 @@ export class Servico {
   inicio: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @Column({ type: 'timestamp', nullable: false })
+  @Column({ type: 'timestamp', nullable: true })
   termino: Date;
 
   @ApiProperty()
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  @IsNotEmpty()
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   valor: number;
 
   @ApiProperty({ type: () => Usuario })
