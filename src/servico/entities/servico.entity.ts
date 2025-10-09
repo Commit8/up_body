@@ -34,6 +34,9 @@ export class Servico {
   usuario: Usuario;
 
   @ApiProperty({ type: () => Categoria })
-  @ManyToOne(() => Categoria, (categoria) => categoria.servico)
+  @ManyToOne(() => Categoria, (categoria) => categoria.servico, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   categoria: Categoria;
 }
