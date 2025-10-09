@@ -25,8 +25,7 @@ export class Servico {
   termino: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
   valor: number;
 
   @ApiProperty({ type: () => Usuario })
