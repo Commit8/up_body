@@ -63,6 +63,12 @@ export class UsuarioService {
   async findImc(id: number): Promise<string> {
     const usuario = await this.findById(id);
     const imc = usuario.peso / usuario.altura ** 2;
+    if (!imc || isNaN(imc) || imc === Infinity) {
+      throw new HttpException(
+        'Impossivel calcular o IMC do Usuario',
+        HttpStatus.NOT_FOUND,
+      );
+    }
     return imc.toFixed(2);
   }
 }
