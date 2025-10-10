@@ -57,7 +57,7 @@ export class UsuarioService {
         'O e-mail já está cadastrado!',
         HttpStatus.BAD_REQUEST,
       );
-
+    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return await this.usuarioRepository.save(usuario);
   }
   async findImc(id: number): Promise<string> {
